@@ -1,5 +1,5 @@
 {
-  "name": "phonebook-backend",
+  "name": "mmnvk-backend",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Dmytro1117/phonebook-api_node.js"
+    "url": "git+https://github.com/Dmytro1117/mnvk-api_node.js"
   },
   "keywords": [],
   "author": "Dmytro1117 (https://github.com/Dmytro1117)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Dmytro1117/phonebook-api_node.js/issues"
+    "url": "https://github.com/Dmytro1117/mnvk-api_node.js/issues"
   },
-  "homepage": "https://github.com/Dmytro1117/phonebook-api_node.js/blob/main/README.md",
+  "homepage": "https://github.com/Dmytro1117/mnvk-api_node.js/blob/main/README.md",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cloudinary": "^2.5.1",
