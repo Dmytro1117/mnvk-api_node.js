@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const { handleSaveError } = require("../middlewares/handleSaveError");
 const { setUpdateOptions } = require("../helpers/setUpdateOptions");
-const { emailRegexp, typeSubscription } = require("../constants/constant");
+const { emailRegexp } = require("../constants/constant");
 
 const userSchema = new Schema(
   {
@@ -20,11 +20,7 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
     },
-    subscription: {
-      type: String,
-      enum: typeSubscription,
-      default: "starter",
-    },
+
     token: {
       type: String,
       default: "",

@@ -10,7 +10,6 @@ const {
 } = require("../controllers/authControllers");
 const authenticate = require("../middlewares/authenticate");
 const multerDownload = require("../middlewares/multerDownload");
-
 const {
   registerJoiSchema,
   verifyJoiSchema,
