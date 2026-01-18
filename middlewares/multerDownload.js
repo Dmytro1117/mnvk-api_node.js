@@ -14,15 +14,13 @@ const multerConfig = multer.diskStorage({
 });
 
 const limits = {
-  fileSize: 1024 * 1024 * 5,
+  fileSize: 1024 * 1024 * 10,
 };
 
 const fileFilter = (req, file, callback) => {
-  const extension = file.originalname.split(".").pop();
-  if (extension === "exe") {
-    return callback(BadRequest("Sorry, exe not allow file format"));
+  if (!file.mimetype.startsWith("image/")) {
+    return callback(new BadRequest("Only images are allowed!"), false);
   }
-
   callback(null, true);
 };
 

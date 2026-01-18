@@ -1,12 +1,16 @@
 const { BadRequest } = require("http-errors");
 
-const validateJoyWrapper = (joiSchema) => {
+const validateJoyWrapper = (joiSchema, property = "body") => {
   const func = (req, res, next) => {
-    const { error } = joiSchema.validate(req.body, { abortEarly: false });
+    const { error } = joiSchema.validate(req[property], {
+      abortEarly: false,
+      allowUnknown: true,
+    });
 
     if (error) {
+      console.log(`Joi Validation Error [${property}]:`, error.details);
       const errors = error.details.map((err) => err.message);
-      throw new BadRequest(errors);
+      return next(new BadRequest(errors));
     }
 
     next();
@@ -16,16 +20,3 @@ const validateJoyWrapper = (joiSchema) => {
 };
 
 module.exports = validateJoyWrapper;
-
-// const validateJoyWrapper = (joiSchema) => {
-//   const func = (req, res, next) => {
-//     const { error } = joiSchema.validate(req.body);
-
-//     if (error) {
-//       throw new BadRequest(`Please, ${error.message}`);
-//     }
-//     next();
-//   };
-
-//   return func;
-// };

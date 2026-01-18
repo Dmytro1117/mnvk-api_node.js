@@ -13,20 +13,20 @@
   "paths": {
     "/auth/register": {
       "post": {
-        "summary": "Registration new user",
         "tags": [
           "Authorization"
         ],
+        "summary": "Registration new user",
         "operationId": "RegistrationNewUser",
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Registration"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "201": {
@@ -54,13 +54,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Sorry, user with email in use"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_409"
                 }
               }
             }
@@ -70,17 +64,17 @@
     },
     "/auth/verify/{verificationToken}": {
       "get": {
-        "summary": "Verification User's email",
         "tags": [
           "Authorization"
         ],
+        "summary": "Verification User's email",
         "operationId": "VerificationEmail",
         "parameters": [
           {
             "name": "verificationToken",
             "in": "path",
-            "required": true,
             "description": "verification token",
+            "required": true,
             "schema": {
               "type": "string"
             },
@@ -89,17 +83,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Succes",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Verification successful"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_200"
                 }
               }
             }
@@ -109,13 +97,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Verification user not found"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_404"
                 }
               }
             }
@@ -125,40 +107,28 @@
     },
     "/auth/verify/resend-email": {
       "post": {
-        "summary": "Resend verification token",
         "tags": [
           "Authorization"
         ],
+        "summary": "Resend verification token",
         "operationId": "ResendVerification",
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "example": "email@sci.net"
-                  }
-                }
+                "$ref": "#/components/schemas/verify_resendemail_body"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
-            "description": "Succes",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Verify email send success"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_200_1"
                 }
               }
             }
@@ -168,13 +138,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Verification has already been passed"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_400"
                 }
               }
             }
@@ -184,13 +148,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Email not found"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_404_1"
                 }
               }
             }
@@ -200,37 +158,28 @@
     },
     "/auth/login": {
       "post": {
-        "summary": "Login User",
         "tags": [
           "Authorization"
         ],
+        "summary": "Login User",
         "operationId": "LoginUser",
         "requestBody": {
-          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Login"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
-            "description": "Succes",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MWRiNzkwZTJyNjYzYjYxNThiZjdhNyIsImlhdCI6MTY5Njk1MjY5MSwiZXhwIjoxNjj2OTcwNjkxfQ.W7LsndQygCykOh_noKNhcQCMQiXds6HP3pYzIur3k6A"
-                    },
-                    "user": {
-                      "$ref": "#/components/schemas/RegistrationCurrentResponse"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_200_2"
                 }
               }
             }
@@ -250,13 +199,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Email not verified"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_401"
                 }
               }
             }
@@ -266,13 +209,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Sorry, password or email is wrong"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_403"
                 }
               }
             }
@@ -282,14 +219,14 @@
     },
     "/auth/current": {
       "get": {
-        "summary": "Get user's info",
         "tags": [
           "Authorization"
         ],
+        "summary": "Get user's info",
         "operationId": "getUserInfo",
         "responses": {
           "200": {
-            "description": "Succes",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -318,97 +255,14 @@
     },
     "/auth/logout": {
       "post": {
-        "summary": "Logout a user",
         "tags": [
           "Authorization"
         ],
+        "summary": "Logout a user",
         "operationId": "logoutUser",
         "responses": {
           "204": {
             "description": "No Content"
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Unauthorized"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/user/subscription": {
-      "patch": {
-        "summary": "Patch subscription user",
-        "tags": [
-          "User"
-        ],
-        "operationId": "patchSubscription",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "subscription": {
-                    "type": "string",
-                    "enum": [
-                      "starter",
-                      "pro",
-                      "business"
-                    ],
-                    "example": "pro"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Succes",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "example": "Subscription change on business success"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BadRequest"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Unauthorized"
-                }
-              }
-            }
           }
         },
         "security": [
@@ -420,27 +274,20 @@
     },
     "/user/avatars": {
       "patch": {
-        "summary": "Uploads an image user",
         "tags": [
           "User"
         ],
+        "summary": "Uploads an image user",
         "operationId": "uploadImage",
         "requestBody": {
-          "required": true,
           "content": {
             "multipart/form-data": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "avatar": {
-                    "type": "string",
-                    "format": "binary",
-                    "description": "The avatar image file to upload."
-                  }
-                }
+                "$ref": "#/components/schemas/user_avatars_body"
               }
             }
-          }
+          },
+          "required": true
         },
         "responses": {
           "200": {
@@ -448,13 +295,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "avatar": {
-                      "type": "string",
-                      "example": "www.avatar.com/76ceae3375ff085a80d80e31e960da34"
-                    }
-                  }
+                  "$ref": "#/components/schemas/inline_response_200_3"
                 }
               }
             }
@@ -464,10 +305,266 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BadRequest"
+                  "$ref": "#/components/schemas/inline_response_400_1"
                 }
               }
             }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/professions": {
+      "get": {
+        "tags": [
+          "Admin / Professions"
+        ],
+        "summary": "Отримати список усіх професій (без лекцій)",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfessionListResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Admin / Professions"
+        ],
+        "summary": "Створити нову професію",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/AddProfessionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfessionSingleResponse"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/professions/{id}": {
+      "get": {
+        "tags": [
+          "Admin / Professions"
+        ],
+        "summary": "Отримати повну інформацію про професію за ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProfessionSingleResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Admin / Professions"
+        ],
+        "summary": "Видалити професію",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/professions/{id}/photos": {
+      "patch": {
+        "tags": [
+          "Admin / Photos"
+        ],
+        "summary": "Додати нові фото до галереї професії",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/id_photos_body"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/professions/{id}/lectures": {
+      "post": {
+        "tags": [
+          "Admin / Lectures"
+        ],
+        "summary": "Додати лекцію до професії",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/id_lectures_body"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/professions/{id}/lectures/{lectureId}": {
+      "delete": {
+        "tags": [
+          "Admin / Lectures"
+        ],
+        "summary": "Видалити лекцію",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lectureId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/professions/{id}/photos/{photoId}": {
+      "delete": {
+        "tags": [
+          "Admin / Photos"
+        ],
+        "summary": "Видалити фото з галереї",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "photoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         },
         "security": [
@@ -481,12 +578,12 @@
   "components": {
     "schemas": {
       "Registration": {
-        "type": "object",
         "required": [
-          "name",
           "email",
+          "name",
           "password"
         ],
+        "type": "object",
         "properties": {
           "name": {
             "type": "string",
@@ -497,9 +594,9 @@
             "example": "emailm@sci.net"
           },
           "password": {
-            "type": "string",
             "minLength": 10,
-            "example": 1234567890
+            "type": "string",
+            "example": "1234567890"
           }
         }
       },
@@ -507,48 +604,25 @@
         "type": "object",
         "properties": {
           "user": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string",
-                "example": "John Robson"
-              },
-              "email": {
-                "type": "string",
-                "example": "emailm@sci.net"
-              },
-              "avatar": {
-                "type": "string",
-                "example": "www.gravatar.com/avatar/76ceae3375ff085a80d80e31e960da34"
-              },
-              "subscription": {
-                "type": "string",
-                "enum": [
-                  "starter",
-                  "pro",
-                  "business"
-                ],
-                "example": "starter"
-              }
-            }
+            "$ref": "#/components/schemas/RegistrationCurrentResponse_user"
           }
         }
       },
       "Login": {
-        "type": "object",
         "required": [
           "email",
           "password"
         ],
+        "type": "object",
         "properties": {
           "email": {
             "type": "string",
             "example": "emailm@sci.net"
           },
           "password": {
-            "type": "string",
             "minLength": 10,
-            "example": 1234567890
+            "type": "string",
+            "example": "1234567890"
           }
         }
       },
@@ -567,6 +641,377 @@
           "message": {
             "type": "string",
             "example": "Not authorized"
+          }
+        }
+      },
+      "AddProfessionRequest": {
+        "required": [
+          "category",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Fullstack Developer"
+          },
+          "category": {
+            "type": "string",
+            "example": "it"
+          },
+          "cover": {
+            "type": "string",
+            "format": "binary"
+          },
+          "poster": {
+            "type": "string",
+            "format": "binary"
+          },
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "about": {
+            "$ref": "#/components/schemas/AddProfessionRequest_about"
+          }
+        }
+      },
+      "ProfessionListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "professions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfessionShort"
+            }
+          }
+        }
+      },
+      "ProfessionSingleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "profession": {
+            "$ref": "#/components/schemas/ProfessionFull"
+          }
+        }
+      },
+      "ProfessionShort": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "poster": {
+            "type": "string"
+          }
+        }
+      },
+      "ProfessionFull": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "poster": {
+            "type": "string"
+          },
+          "about": {
+            "$ref": "#/components/schemas/ProfessionFull_about"
+          },
+          "gallery": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfessionFull_gallery"
+            }
+          },
+          "lectures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Lecture"
+            }
+          }
+        }
+      },
+      "Lecture": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "lectureTitle": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_409": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Користувач з таким email вже зареєстрований"
+          }
+        }
+      },
+      "inline_response_200": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "data": {
+            "$ref": "#/components/schemas/inline_response_200_data"
+          }
+        }
+      },
+      "inline_response_404": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Користувача не знайдено або пошта вже підтверджена"
+          }
+        }
+      },
+      "verify_resendemail_body": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "email@sci.net"
+          }
+        }
+      },
+      "inline_response_200_1": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Лист для підтвердження надіслано"
+          }
+        }
+      },
+      "inline_response_400": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Верифікація вже пройдена"
+          }
+        }
+      },
+      "inline_response_404_1": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Користувача з такою поштою не знайдено"
+          }
+        }
+      },
+      "inline_response_200_2": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MWRiNzkwZTJyNjYzYjYxNThiZjdhNyIsImlhdCI6MTY5Njk1MjY5MSwiZXhwIjoxNjj2OTcwNjkxfQ.W7LsndQygCykOh_noKNhcQCMQiXds6HP3pYzIur3k6A"
+          },
+          "user": {
+            "$ref": "#/components/schemas/RegistrationCurrentResponse"
+          }
+        }
+      },
+      "inline_response_401": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Електронна пошта не підтверджена"
+          }
+        }
+      },
+      "inline_response_403": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Пароль вказано невірно"
+          }
+        }
+      },
+      "user_avatars_body": {
+        "type": "object",
+        "properties": {
+          "avatar": {
+            "type": "string",
+            "description": "Файл зображення для завантаження",
+            "format": "binary"
+          }
+        }
+      },
+      "inline_response_200_3": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://res.cloudinary.com"
+          }
+        }
+      },
+      "inline_response_400_1": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Будь ласка, виберіть файл"
+          }
+        }
+      },
+      "id_photos_body": {
+        "type": "object",
+        "properties": {
+          "photos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "id_lectures_body": {
+        "required": [
+          "content",
+          "lectureTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "lectureTitle": {
+            "type": "string",
+            "example": "Основи програмування"
+          },
+          "content": {
+            "type": "string",
+            "example": "Текст лекції..."
+          }
+        }
+      },
+      "RegistrationCurrentResponse_user": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "John Robson"
+          },
+          "email": {
+            "type": "string",
+            "example": "emailm@sci.net"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "www.gravatar.com/avatar/76ceae3375ff085a80d80e31e960da34"
+          },
+          "subscription": {
+            "type": "string",
+            "example": "starter",
+            "enum": [
+              "starter",
+              "pro",
+              "business"
+            ]
+          }
+        }
+      },
+      "AddProfessionRequest_about": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "example": "Короткий опис професії"
+          },
+          "text": {
+            "type": "string",
+            "example": "Детальний текст для лендингу"
+          }
+        }
+      },
+      "ProfessionFull_about": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        }
+      },
+      "ProfessionFull_gallery": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "inline_response_200_data": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Верифікація успішна"
           }
         }
       }

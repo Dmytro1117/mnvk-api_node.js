@@ -20,7 +20,7 @@ const register = async (req, res) => {
   if (user) {
     throw new createErrorUnauthorized(
       409,
-      `Sorry, user with email ${email} in use`
+      `Користувач з email ${email} вже зареєстрований`,
     );
   }
 
@@ -57,6 +57,7 @@ const register = async (req, res) => {
       name,
       avatar,
       subscription: newUser.subscription,
+      role: newUser.role,
     },
   });
 };
@@ -67,7 +68,7 @@ const verifyEmail = async (req, res) => {
   const user = await User.findOne({ verificationToken });
 
   if (!user) {
-    throw NotFound("Verification user not found");
+    throw NotFound("Користувача не знайдено або пошта вже підтверджена");
   }
 
   await User.findByIdAndUpdate(user._id, {
@@ -76,10 +77,10 @@ const verifyEmail = async (req, res) => {
   });
 
   res.json({
-    status: "Succes",
+    status: "Success",
     code: 200,
     data: {
-      message: "Verification successful",
+      message: "Верифікація успішна",
     },
   });
 };
@@ -88,10 +89,10 @@ const resendVerifyEmail = async (req, res) => {
   const { email } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
-    throw NotFound("Email not found");
+    throw NotFound("Користувача з такою поштою не знайдено");
   }
   if (user.verify) {
-    throw BadRequest("Verification has already been passed");
+    throw BadRequest("Верифікація вже пройдена");
   }
 
   const verifyEmail = verifycationLetter({
@@ -102,9 +103,9 @@ const resendVerifyEmail = async (req, res) => {
   await sendVerifyEmail(verifyEmail);
 
   res.json({
-    status: "Succes",
+    status: "Success",
     code: 200,
-    message: "Verify email send success",
+    message: "Лист для підтвердження надіслано",
   });
 };
 
@@ -113,15 +114,15 @@ const login = async (req, res) => {
 
   const user = await User.findOne({ email });
   if (!user) {
-    throw new createErrorUnauthorized(403, `Sorry, email is wrong`);
+    throw new createErrorUnauthorized(403, "Електронна пошта вказана невірно");
   }
 
   if (!user.verify) {
-    throw new createErrorUnauthorized(401, "Email not verified");
+    throw new createErrorUnauthorized(401, "Електронна пошта не підтверджена");
   }
   const passwordCompare = await bcrypt.compare(password, user.password);
   if (!passwordCompare || password === "") {
-    throw new createErrorUnauthorized(403, `Sorry, password is wrong`);
+    throw new createErrorUnauthorized(403, "Пароль вказано невірно");
   }
 
   const payload = {
@@ -132,7 +133,7 @@ const login = async (req, res) => {
   await User.findByIdAndUpdate(user._id, { token });
 
   res.json({
-    status: "Succes",
+    status: "Success",
     code: 200,
     token,
     user: {
@@ -140,20 +141,22 @@ const login = async (req, res) => {
       name: user.name,
       avatar: user.avatar,
       subscription: user.subscription,
+      role: user.role,
     },
   });
 };
 
 const curent = async (req, res) => {
-  const { name, email, subscription, avatar } = req.user;
+  const { name, email, subscription, avatar, role } = req.user;
   res.json({
-    status: "Succes",
+    status: "Success",
     code: 200,
     user: {
       name,
       email,
       subscription,
       avatar,
+      role,
     },
   });
 };

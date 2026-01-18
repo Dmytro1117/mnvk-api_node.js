@@ -1,7 +1,5 @@
 # MMNVK API (backend)
 
-![Node.js](./assets/SwaggerEditor.png)
-
 ## Стек технологій
 
 ![Node](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
@@ -13,21 +11,16 @@
 ![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 ![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)
 
-## Опис проекту
+## Опис проєкту
 
-`MMNVK API` Реєстрація та авторизація учня в навчальній базі навчального закладу.
+`MMNVK API` Реєстрація та авторизація учня в навчальній базі закладу.
 
 `Основні функції:`
 
 - Реєстрація та Авторизація.
-- Додавання фотографії user, статусу (Standart, Pro, Vip).
 - Верифікація електронної пошти, щоб забезпечити, що адреси користувачів є дійсними.
-
-## Swagger
-
-Специфікація була розроблена за допомогою Swagger Editor. Swagger Editor - це онлайн-редактор для створення, редагування та тестування файлів специфікацій Swagger, які описують REST API.
-
-Розміщення Swagger-документації на бекенді і використання її з допомогою Swagger UI є чудовим способом документувати та візуалізувати API для користувачів та розробників.
+- Додавання фотографії user.
+- Панель адміністратора (Додавання-видалення професій, лекцій, фотографій)
 
 ## Технічні характеристики
 

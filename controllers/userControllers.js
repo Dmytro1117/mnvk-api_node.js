@@ -7,7 +7,7 @@ const updateAvatar = async (req, res) => {
   const { _id } = req.user;
 
   if (!req.file) {
-    throw new BadRequest(`Please, input file`);
+    throw new BadRequest(`Будь ласка, виберіть файл`);
   }
 
   const avatar = await cloudinaryDownload(req.file, "avatars", [
@@ -17,7 +17,7 @@ const updateAvatar = async (req, res) => {
   await User.findByIdAndUpdate(_id, { avatar });
 
   res.json({
-    status: "Succes",
+    status: "Success",
     code: 200,
     avatar,
   });
