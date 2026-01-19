@@ -1,4 +1,4 @@
-# MMNVK API (backend)
+# MMNVK API
 
 ## Стек технологій
 
