@@ -44,7 +44,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BadRequest"
+                  "$ref": "#/components/schemas/ErrorBadRequest"
                 }
               }
             }
@@ -54,7 +54,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_409"
+                  "$ref": "#/components/schemas/ErrorConflict"
                 }
               }
             }
@@ -87,7 +87,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200"
+                  "$ref": "#/components/schemas/VerificationSuccessResponse"
                 }
               }
             }
@@ -97,7 +97,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_404"
+                  "$ref": "#/components/schemas/ErrorNotFound"
                 }
               }
             }
@@ -116,7 +116,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/verify_resendemail_body"
+                "$ref": "#/components/schemas/VerifyResendEmailRequest"
               }
             }
           },
@@ -128,7 +128,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200_1"
+                  "$ref": "#/components/schemas/StandardSuccessResponse"
                 }
               }
             }
@@ -138,7 +138,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_400"
+                  "$ref": "#/components/schemas/ErrorBadRequest"
                 }
               }
             }
@@ -148,7 +148,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_404_1"
+                  "$ref": "#/components/schemas/ErrorNotFound"
                 }
               }
             }
@@ -179,7 +179,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200_2"
+                  "$ref": "#/components/schemas/LoginResponse"
                 }
               }
             }
@@ -189,7 +189,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/BadRequest"
+                  "$ref": "#/components/schemas/ErrorBadRequest"
                 }
               }
             }
@@ -199,7 +199,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_401"
+                  "$ref": "#/components/schemas/ErrorUnauthorized"
                 }
               }
             }
@@ -209,7 +209,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_403"
+                  "$ref": "#/components/schemas/ErrorForbidden"
                 }
               }
             }
@@ -240,7 +240,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Unauthorized"
+                  "$ref": "#/components/schemas/ErrorUnauthorized"
                 }
               }
             }
@@ -283,7 +283,7 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/user_avatars_body"
+                "$ref": "#/components/schemas/UserAvatarUploadRequest"
               }
             }
           },
@@ -295,7 +295,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_200_3"
+                  "$ref": "#/components/schemas/AvatarUpdateResponse"
                 }
               }
             }
@@ -305,7 +305,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/inline_response_400_1"
+                  "$ref": "#/components/schemas/ErrorBadRequest"
                 }
               }
             }
@@ -447,7 +447,7 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/id_photos_body"
+                "$ref": "#/components/schemas/AddPhotosRequest"
               }
             }
           }
@@ -484,48 +484,12 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/id_lectures_body"
+                "$ref": "#/components/schemas/AddLectureRequest"
               }
             }
           },
           "required": true
         },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
-      }
-    },
-    "/professions/{id}/lectures/{lectureId}": {
-      "delete": {
-        "tags": [
-          "Admin / Lectures"
-        ],
-        "summary": "Видалити лекцію",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "lectureId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -573,6 +537,42 @@
           }
         ]
       }
+    },
+    "/professions/{id}/lectures/{lectureId}": {
+      "delete": {
+        "tags": [
+          "Admin / Lectures"
+        ],
+        "summary": "Видалити лекцію",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lectureId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -600,14 +600,6 @@
           }
         }
       },
-      "RegistrationCurrentResponse": {
-        "type": "object",
-        "properties": {
-          "user": {
-            "$ref": "#/components/schemas/RegistrationCurrentResponse_user"
-          }
-        }
-      },
       "Login": {
         "required": [
           "email",
@@ -626,21 +618,49 @@
           }
         }
       },
-      "BadRequest": {
+      "UserResponseData": {
         "type": "object",
         "properties": {
-          "message": {
+          "name": {
             "type": "string",
-            "example": "Validation error's description"
+            "example": "John Robson"
+          },
+          "email": {
+            "type": "string",
+            "example": "emailm@sci.net"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "://www.gravatar.com..."
+          },
+          "subscription": {
+            "type": "string",
+            "example": "starter",
+            "enum": [
+              "starter",
+              "pro",
+              "business"
+            ]
           }
         }
       },
-      "Unauthorized": {
+      "RegistrationCurrentResponse": {
         "type": "object",
         "properties": {
-          "message": {
+          "user": {
+            "$ref": "#/components/schemas/UserResponseData"
+          }
+        }
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
             "type": "string",
-            "example": "Not authorized"
+            "example": "eyJhbGciOiJIUzI1Ni..."
+          },
+          "user": {
+            "$ref": "#/components/schemas/RegistrationCurrentResponse"
           }
         }
       },
@@ -676,41 +696,6 @@
           },
           "about": {
             "$ref": "#/components/schemas/AddProfessionRequest_about"
-          }
-        }
-      },
-      "ProfessionListResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "Success"
-          },
-          "code": {
-            "type": "number",
-            "example": 200
-          },
-          "professions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/ProfessionShort"
-            }
-          }
-        }
-      },
-      "ProfessionSingleResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "Success"
-          },
-          "code": {
-            "type": "number",
-            "example": 200
-          },
-          "profession": {
-            "$ref": "#/components/schemas/ProfessionFull"
           }
         }
       },
@@ -777,41 +762,7 @@
           }
         }
       },
-      "inline_response_409": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Користувач з таким email вже зареєстрований"
-          }
-        }
-      },
-      "inline_response_200": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "Success"
-          },
-          "code": {
-            "type": "number",
-            "example": 200
-          },
-          "data": {
-            "$ref": "#/components/schemas/inline_response_200_data"
-          }
-        }
-      },
-      "inline_response_404": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Користувача не знайдено або пошта вже підтверджена"
-          }
-        }
-      },
-      "verify_resendemail_body": {
+      "VerifyResendEmailRequest": {
         "type": "object",
         "properties": {
           "email": {
@@ -820,100 +771,16 @@
           }
         }
       },
-      "inline_response_200_1": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Лист для підтвердження надіслано"
-          }
-        }
-      },
-      "inline_response_400": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Верифікація вже пройдена"
-          }
-        }
-      },
-      "inline_response_404_1": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Користувача з такою поштою не знайдено"
-          }
-        }
-      },
-      "inline_response_200_2": {
-        "type": "object",
-        "properties": {
-          "token": {
-            "type": "string",
-            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MWRiNzkwZTJyNjYzYjYxNThiZjdhNyIsImlhdCI6MTY5Njk1MjY5MSwiZXhwIjoxNjj2OTcwNjkxfQ.W7LsndQygCykOh_noKNhcQCMQiXds6HP3pYzIur3k6A"
-          },
-          "user": {
-            "$ref": "#/components/schemas/RegistrationCurrentResponse"
-          }
-        }
-      },
-      "inline_response_401": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Електронна пошта не підтверджена"
-          }
-        }
-      },
-      "inline_response_403": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Пароль вказано невірно"
-          }
-        }
-      },
-      "user_avatars_body": {
+      "UserAvatarUploadRequest": {
         "type": "object",
         "properties": {
           "avatar": {
             "type": "string",
-            "description": "Файл зображення для завантаження",
             "format": "binary"
           }
         }
       },
-      "inline_response_200_3": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "Success"
-          },
-          "code": {
-            "type": "number",
-            "example": 200
-          },
-          "avatar": {
-            "type": "string",
-            "example": "https://res.cloudinary.com"
-          }
-        }
-      },
-      "inline_response_400_1": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string",
-            "example": "Будь ласка, виберіть файл"
-          }
-        }
-      },
-      "id_photos_body": {
+      "AddPhotosRequest": {
         "type": "object",
         "properties": {
           "photos": {
@@ -925,7 +792,7 @@
           }
         }
       },
-      "id_lectures_body": {
+      "AddLectureRequest": {
         "required": [
           "content",
           "lectureTitle"
@@ -942,29 +809,125 @@
           }
         }
       },
-      "RegistrationCurrentResponse_user": {
+      "StandardSuccessResponse": {
         "type": "object",
         "properties": {
-          "name": {
+          "message": {
             "type": "string",
-            "example": "John Robson"
+            "example": "Операція успішна"
+          }
+        }
+      },
+      "VerificationSuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
           },
-          "email": {
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "data": {
+            "$ref": "#/components/schemas/VerificationSuccessResponse_data"
+          }
+        }
+      },
+      "AvatarUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
             "type": "string",
-            "example": "emailm@sci.net"
+            "example": "Success"
+          },
+          "code": {
+            "type": "number",
+            "example": 200
           },
           "avatar": {
             "type": "string",
-            "example": "www.gravatar.com/avatar/76ceae3375ff085a80d80e31e960da34"
-          },
-          "subscription": {
+            "example": "https://res.cloudinary.com"
+          }
+        }
+      },
+      "ProfessionListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
             "type": "string",
-            "example": "starter",
-            "enum": [
-              "starter",
-              "pro",
-              "business"
-            ]
+            "example": "Success"
+          },
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "professions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProfessionShort"
+            }
+          }
+        }
+      },
+      "ProfessionSingleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "Success"
+          },
+          "code": {
+            "type": "number",
+            "example": 200
+          },
+          "profession": {
+            "$ref": "#/components/schemas/ProfessionFull"
+          }
+        }
+      },
+      "ErrorBadRequest": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Validation error"
+          }
+        }
+      },
+      "ErrorUnauthorized": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Not authorized"
+          }
+        }
+      },
+      "ErrorForbidden": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Доступ заборонено / Пароль невірний"
+          }
+        }
+      },
+      "ErrorNotFound": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Ресурс не знайдено"
+          }
+        }
+      },
+      "ErrorConflict": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Користувач вже існує"
           }
         }
       },
@@ -973,11 +936,11 @@
         "properties": {
           "description": {
             "type": "string",
-            "example": "Короткий опис професії"
+            "example": "Короткий опис"
           },
           "text": {
             "type": "string",
-            "example": "Детальний текст для лендингу"
+            "example": "Детальний текст"
           }
         }
       },
@@ -1006,7 +969,7 @@
           }
         }
       },
-      "inline_response_200_data": {
+      "VerificationSuccessResponse_data": {
         "type": "object",
         "properties": {
           "message": {
