@@ -10,9 +10,12 @@ const updateAvatar = async (req, res) => {
     throw new BadRequest(`Будь ласка, виберіть файл`);
   }
 
-  const avatar = await cloudinaryDownload(req.file, "avatars", [
-    { width: 250, height: 350 },
-  ]);
+  const avatar = await cloudinaryDownload(
+    req.file,
+    "avatars",
+    [{ width: 250, height: 250, crop: "fill" }],
+    `user_${_id}`,
+  );
 
   await User.findByIdAndUpdate(_id, { avatar });
 

@@ -42,7 +42,7 @@ const userSchema = new Schema(
       default: null,
     },
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false, timestamps: true },
 );
 
 userSchema.post("save", handleSaveError);
@@ -51,6 +51,6 @@ userSchema.pre("findOneAndUpdate", setUpdateOptions);
 
 userSchema.post("findOneAndUpdate", handleSaveError);
 
-const User = model("user", userSchema);
+const User = model("user", userSchema, "mnvkUsers");
 
 module.exports = User;

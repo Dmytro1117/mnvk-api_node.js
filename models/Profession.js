@@ -43,6 +43,6 @@ professionSchema.post("save", handleSaveError);
 professionSchema.pre("findOneAndUpdate", setUpdateOptions);
 professionSchema.post("findOneAndUpdate", handleSaveError);
 
-const Profession = model("profession", professionSchema);
+const Profession = model("profession", professionSchema, "mnvkpPofession");
 
 module.exports = Profession;

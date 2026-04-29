@@ -1,24 +1,19 @@
 {
   "name": "mmnvk-backend",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
+  "author": "Dmytro1117 (https://github.com/Dmytro1117)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Dmytro1117/mnvk-api_node.js.git"
+  },
+  "license": "ISC",
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./server.js",
     "dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Dmytro1117/mnvk-api_node.js"
-  },
-  "keywords": [],
-  "author": "Dmytro1117 (https://github.com/Dmytro1117)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Dmytro1117/mnvk-api_node.js/issues"
-  },
-  "homepage": "https://github.com/Dmytro1117/mnvk-api_node.js/blob/main/README.md",
   "dependencies": {
     "@getbrevo/brevo": "^3.0.1",
     "bcrypt": "^5.1.0",

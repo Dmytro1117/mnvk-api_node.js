@@ -1,33 +1,63 @@
 # MMNVK API
 
-## Стек технологій
-
-![Node](https://img.shields.io/badge/Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Swagger](https://img.shields.io/badge/Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white)
-![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)
-![NPM](https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
-![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white)
+🔗 **[Live Swagger Documentation](https://mnvk-api-node-js.onrender.com/api-docs)**
 
 ## Опис проєкту
 
-`MMNVK API` Реєстрація та авторизація учня в навчальній базі закладу.
+**MMNVK API** Реєстрація та авторизація учня в навчальній базі закладу.
 
-`Основні функції:`
+### Основні функції:
 
 - Реєстрація та Авторизація.
-- Верифікація електронної пошти, щоб забезпечити, що адреси користувачів є дійсними.
+- Верифікація електронної пошти.
 - Додавання фотографії user.
 - Панель адміністратора (Додавання-видалення професій, лекцій, фотографій)
 
 ## Технічні характеристики
 
-`Зберігання даних:` Дані користувачів та контакти зберігаються в базі даних MongoDB.
+- **Основа**: "Node.js",
+- **Фреймворк**: "Express.js",
+- **База даних**: "MongoDB з Mongoose",
+- **Автентифікація**: "JWT та Bcrypt",
+- **Хмарне сховище файлів**: "Cloudinary",
+- **Сервіс розсилки email**: "Brevo",
+- **Валідація**: "Joi",
+- **Документація**: "Swagger UI",
+- **Інше**: "Docker"
 
-`Забезпечення безпеки:` Захист особистих даних користувачів, включаючи шифрування паролів та перевірку доступу до ресурсів.
+## Як почати роботу
 
-`Хмарні послуги:` Cloudinary для зберігання фотографій користувачів.
+### 1. **Зклонуйте репозиторій:**
 
-`Посилання на swagger-docs:` https://mnvk-api-node-js.onrender.com/api-docs
+```bash
+   git clone https://github.com/Dmytro1117/mnvk-api_node.js.git
+```
+
+### 2. **Встановіть залежності:**
+
+```bash
+   npm install
+```
+
+### 3. **Налаштуйте змінні оточення:**
+
+Створіть файл `.env` у кореневій папці та додайте ваші ключі (використовуйте `.env.example` як зразок).
+
+```env
+PORT=8080
+BASE_URL=your_deployed_frontend_or_localhost
+DB_HOST=your_mongodb_connection_string
+SECRET_KEY=your_jwt_secret
+API_KEY_BREVO=your_brevo_key
+CLOUDINARY_NAME=name
+CLOUDINARY_KEY=key
+CLOUDINARY_SECRET=secret
+```
+
+### 4. **Запустіть додаток:**
+
+```bash
+npm run dev
+```
+
+Сервер буде запущено за адресою: http://localhost:8080

@@ -2,6 +2,7 @@ const { NotFound } = require("http-errors");
 const Profession = require("../models/Profession");
 const { controllerWrapper } = require("../decorators/controllerWrapper");
 const cloudinaryDownload = require("../helpers/cloudinaryDownload");
+const cloudinaryDelete = require("../helpers/cloudinaryDelete");
 
 const getAllProfessions = async (req, res) => {
   const professions = await Profession.find(
@@ -32,6 +33,9 @@ const getProfessionById = async (req, res) => {
 };
 
 const addProfession = async (req, res) => {
+  console.log(req.body);
+  console.log(req.files);
+
   let mainImage = null;
   if (req.files?.cover) {
     mainImage = await cloudinaryDownload(
@@ -159,12 +163,32 @@ const deleteLecture = async (req, res) => {
 
 const deletePhoto = async (req, res) => {
   const { id, photoId } = req.params;
+
+  // 1. Знаходим саму професію за її ID
+  const profession = await Profession.findById(id);
+
+  if (!profession) {
+    throw new NotFound(`Profession with id=${id} not found`);
+  }
+
+  // 2. Шукаєм потрібне фото в масиві gallery за допомогою методу .id()
+  const photo = profession.gallery.id(photoId);
+
+  console.log("--- DEBUG DELETE PHOTO ---");
+  console.log("Found photo object:", photo);
+
+  // 3. Якщо фото знайшли і у нього є url — видаляємо з Cloudinary
+  if (photo && photo.url) {
+    await cloudinaryDelete(photo.url);
+  }
+
+  // 4. Тепер видаляю з бази
   const result = await Profession.findByIdAndUpdate(
     id,
     { $pull: { gallery: { _id: photoId } } },
     { new: true },
   );
-  if (!result) throw new NotFound("Not found");
+
   res.json({ status: "Success", code: 200, data: result });
 };
 
